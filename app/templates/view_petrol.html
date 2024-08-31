@@ -22,18 +22,18 @@
             <tbody>
                 {% for record in data %}
                 <tr>
-                    <td>{{ record['Date'] }}</td>
-                    <td>{{ record['Mileage'] }}</td>
-                    <td>{{ record['Price'] }}</td>
+                    <td>{{ record['Datetime'] }}</td>
+                    <td>{{ record['Kilometers'] }}</td>
+                    <td>{{ record['Petrol Price'] }}</td>
                     <td>{{ record['Liters'] }}</td>
                     <td>
-                        <a href="{{ url_for('delete_petrol', index=loop.index0) }}" onclick="return confirm('Are you sure you want to delete this record?');">Delete</a>
+                        <a href="{{ url_for('main.delete_petrol', index=loop.index0) }}" onclick="return confirm('Are you sure you want to delete this record?');">Delete</a>
                     </td>
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
-        <a href="{{ url_for('petrol') }}" class="button">Back</a>
+        <a href="{{ url_for('main.petrol') }}" class="button">Back</a>
     </div>
 </body>
 </html>
