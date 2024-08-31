@@ -14,11 +14,15 @@
             <input type="number" id="amount" name="amount" step="0.01" required><br>
             <label for="mileage">Mileage (km):</label>
             <input type="number" id="mileage" name="mileage" step="0.01" required><br>
-            <label for="oil_changed">Oil Changed:</label><br>
-            <input type="radio" id="oil_changed_yes" name="oil_changed" value="Yes">
-            <label for="oil_changed_yes">Yes</label>
-            <input type="radio" id="oil_changed_no" name="oil_changed" value="No">
-            <label for="oil_changed_no">No</label><br>
+
+            <label for="oil_changed">Oil Changed:</label><br><br>
+            <label for="oil_changed_yes">
+                <input type="radio" id="oil_changed_yes" name="oil_changed" value="yes"> Yes
+            </label>
+            <label for="oil_changed_no">
+                <input type="radio" id="oil_changed_no" name="oil_changed" value="no"> No
+            </label>
+        </br>
             <button type="submit" class="button">Add Service Data</button>
         </form>
         <a href="{{ url_for('main.view_service') }}" class="button">View Service Data</a>
