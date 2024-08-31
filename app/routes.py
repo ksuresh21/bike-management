@@ -6,8 +6,8 @@ import os
 
 main = Blueprint('main', __name__)
 
-bike_data='data/bike_data.xlsx'
-service_data='data/service_data.xlsx'
+bike_data='data/bike_data.csv'
+service_data='data/service_data.csv'
 
 @main.route('/')
 def home():
@@ -27,10 +27,15 @@ def petrol():
             'Petrol Price': [petrol_price],
             'Liters': [liters]
         })
+        #1sttime
+        # columns = ['Datetime', 'Kilometers', 'Petrol Price', 'Liters']
+        # empty_df = pd.DataFrame(columns=columns)
+        # empty_df.to_csv(bike_data, index=False)
 
-        existing_data = pd.read_excel(bike_data)
+        existing_data = pd.read_csv(bike_data)
+        existing_data.columns = ['Datetime', 'Kilometers', 'Petrol Price', 'Liters']
         updated_data = pd.concat([existing_data, new_data], ignore_index=True)
-        updated_data.to_excel(bike_data, index=False)
+        updated_data.to_csv(bike_data, index=False)
                 
         flash('Petrol data added successfully!')
         return redirect(url_for('main.petrol'))
@@ -39,7 +44,7 @@ def petrol():
 
 @main.route('/view_petrol')
 def view_petrol():
-    data = pd.read_excel(bike_data)
+    data = pd.read_csv(bike_data)
 
     # Rename columns to match those in HTML template
     data.columns = ['Datetime', 'Kilometers', 'Petrol Price', 'Liters']
@@ -49,13 +54,28 @@ def view_petrol():
     
     return render_template('view_petrol.html', data=records)
 
+@main.route('/delete_petrol/<int:index>', methods=['GET'])
+def delete_petrol(index):
+    # Load existing petrol data
+    if os.path.exists(bike_data):
+        data = pd.read_csv(bike_data)
+        
+        # Drop the record at the specified index
+        data = data.drop(index)
+        
+        # Save the updated DataFrame back to the Excel file
+        data.to_csv(bike_data, index=False)
+    
+    # Redirect to the view_petrol page after deletion
+    return redirect(url_for('main.view_petrol'))
+
 @main.route('/service', methods=['GET', 'POST'])
 def service():
     if request.method == 'POST':
         # Handle form submission for service data
-        service_date = request.form['service_date']
+        service_date =datetime.datetime.now()
         mileage = request.form['mileage']
-        amount_paid = request.form['amount_paid']
+        amount_paid = request.form['amount']
         oil_changed = request.form['oil_changed']
         new_data = pd.DataFrame({
             'Service Date': [service_date],
@@ -63,39 +83,39 @@ def service():
             'Amount Paid': [amount_paid],
             'Oil Changed': [oil_changed]
         })
-        if not os.path.exists(DATA_DIR):
-            os.makedirs(DATA_DIR)
-        if not os.path.exists(EXCEL_FILE):
-            new_data.to_excel(EXCEL_FILE, index=False)
-        else:
-            existing_data = pd.read_excel(EXCEL_FILE)
-            updated_data = pd.concat([existing_data, new_data], ignore_index=True)
-            updated_data.to_excel(EXCEL_FILE, index=False)
+        existing_data = pd.read_csv(service_data)
+        updated_data = pd.concat([existing_data, new_data], ignore_index=True)
+        updated_data.to_csv(service_data, index=False)
         return redirect(url_for('main.view_service'))
     return render_template('service.html')
 
 @main.route('/view_service')
 def view_service():
     # Load service data and render view_service.html
-    if os.path.exists(EXCEL_FILE):
-        data = pd.read_excel(EXCEL_FILE)
-    else:
-        data = pd.DataFrame(columns=['Service Date', 'Mileage', 'Amount Paid', 'Oil Changed'])
-    return render_template('view_service.html', data=data)
+    data = pd.read_csv(service_data)
+
+    # Rename columns to match those in HTML template
+    data.columns = ['Service Date', 'Mileage', 'Amount Paid', 'Oil Changed']
+
+    # Convert the DataFrame to a list of dictionaries
+    records = data.to_dict(orient='records')
+    
+    return render_template('view_service.html', data=records)
 
 
-@main.route('/delete_petrol/<int:index>', methods=['GET'])
-def delete_petrol(index):
+
+
+@main.route('/delete_service/<int:index>', methods=['GET'])
+def delete_service(index):
     # Load existing petrol data
-    if os.path.exists(bike_data):
-        data = pd.read_excel(bike_data)
+    if os.path.exists(service_data):
+        data = pd.read_csv(service_data)
         
         # Drop the record at the specified index
         data = data.drop(index)
         
         # Save the updated DataFrame back to the Excel file
-        data.to_excel(bike_data, index=False)
+        data.to_csv(service_data, index=False)
     
-    # Redirect to the view_petrol page after deletion
-    return redirect(url_for('main.view_petrol'))
-
+    # Redirect to the view_service page after deletion
+    return redirect(url_for('main.view_service'))
