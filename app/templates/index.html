@@ -3,21 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bike Management Tool</title>
+    <title>Bike Management</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <h1>Bike Financial Management</h1>
-    <form action="/add_data" method="POST">
-        <label for="petrol_price">Petrol Price:</label>
-        <input type="text" id="petrol_price" name="petrol_price"><br><br>
-
-        <label for="liters">Liters:</label>
-        <input type="text" id="liters" name="liters"><br><br>
-
-        <label for="kilometers">Kilometers:</label>
-        <input type="text" id="kilometers" name="kilometers"><br><br>
-
-        <input type="submit" value="Submit">
-    </form>
+    <div class="container">
+        <h1>Welcome to Bike Management</h1>
+        <a href="{{ url_for('main.petrol') }}" class="button">Petrol Maintenance</a>
+        <a href="{{ url_for('main.service') }}" class="button">Service Maintenance</a>
+    </div>
 </body>
 </html>
