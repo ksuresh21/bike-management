@@ -1,7 +1,7 @@
 /* General body styling */
 body {
-    background-color: #f0f4f8; /* Soft light blue background */
-    color: #333; /* Darker text color for readability */
+    background-color: #e0f7ec; /* Light green background */
+    color: #2e7d32; /* Dark green text */
     font-family: 'Roboto', sans-serif; /* Modern and clean font */
     text-align: center;
     padding: 20px;
@@ -14,7 +14,7 @@ body {
     padding: 20px;
     background: #ffffff;
     border-radius: 10px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 15px rgba(0, 128, 0, 0.1); /* Greenish shadow */
 }
 
 /* Form elements */
@@ -22,13 +22,14 @@ form label {
     display: block;
     margin: 15px 0 5px;
     font-size: 18px;
+    color: #388e3c; /* Medium green text */
 }
 
 form input {
     width: calc(100% - 22px); /* Adjust width to account for padding */
     padding: 10px;
     margin-bottom: 15px;
-    border: 1px solid #ddd;
+    border: 1px solid #a5d6a7; /* Light green border */
     border-radius: 5px;
     font-size: 16px;
 }
@@ -44,7 +45,7 @@ form input[type="number"] {
     margin: 10px;
     font-size: 18px;
     color: #ffffff;
-    background-color: #007bff; /* Blue background */
+    background-color: #4caf50; /* Green background */
     border: none;
     border-radius: 5px;
     text-decoration: none;
@@ -53,7 +54,7 @@ form input[type="number"] {
 }
 
 .button:hover {
-    background-color: #0056b3; /* Darker blue on hover */
+    background-color: #388e3c; /* Darker green on hover */
 }
 
 /* Flash messages styling */
@@ -72,11 +73,11 @@ form input[type="number"] {
 }
 
 .flash-messages .success {
-    background-color: #28a745; /* Green */
+    background-color: #66bb6a; /* Green */
 }
 
 .flash-messages .error {
-    background-color: #dc3545; /* Red */
+    background-color: #c62828; /* Red */
 }
 
 /* Table styling */
@@ -87,7 +88,7 @@ table {
 }
 
 table, th, td {
-    border: 1px solid #007bff; /* Blue border */
+    border: 1px solid #4caf50; /* Green border */
 }
 
 th, td {
@@ -97,16 +98,16 @@ th, td {
 }
 
 th {
-    background-color: #007bff; /* Blue background for header */
+    background-color: #4caf50; /* Green background for header */
     color: #ffffff; /* White text */
 }
 
 tr:nth-child(even) {
-    background-color: #e9ecef; /* Light grey rows */
+    background-color: #e8f5e9; /* Light green rows */
 }
 
 tr:hover {
-    background-color: #d6eaff; /* Light blue on hover */
+    background-color: #c8e6c9; /* Slightly darker green on hover */
 }
 
 /* Alignment and layout adjustments */
@@ -116,12 +117,14 @@ tr:hover {
     flex-direction: column;
     align-items: center;
 }
+
 /* Form radio button styling */
 form label {
     display: inline-flex;
     align-items: center;
     margin: 5px 15px; /* Space between radio buttons */
     font-size: 18px; /* Adjust font size */
+    color: #388e3c; /* Medium green text */
 }
 
 form input[type="radio"] {
